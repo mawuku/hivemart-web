@@ -1,0 +1,36 @@
+# CloudBees Unify CI workflow for the hivemart-web component.
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: build
+
+on:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  build:
+    steps:
+      - name: Check out source code
+        uses: cloudbees-io/checkout@v1
+
+      - name: Configure container registry credentials
+        uses: cloudbees-io/configure-oci-credentials@v1
+        with:
+          registry: ${{ vars.DOCKER_REGISTRY }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and publish container image
+        uses: cloudbees-io/kaniko@v1
+        with:
+          dockerfile: Dockerfile
+          context: .
+          destination: ${{ vars.DOCKER_REGISTRY }}/hivemart-web:${{ cloudbees.scm.sha }}
+
+      - name: Register build artifact
+        uses: cloudbees-io/register-build-artifact@v1
+        with:
+          name: hivemart-web
+          version: ${{ cloudbees.scm.sha }}
+          url: docker://${{ vars.DOCKER_REGISTRY }}/hivemart-web:${{ cloudbees.scm.sha }}

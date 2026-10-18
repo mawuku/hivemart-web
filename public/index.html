@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HiveMart</title>
+<style>
+  :root { --ink: #2a2418; --paper: #fdf9ef; --comb: #e8a13a; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: grid; place-items: center;
+    background: var(--paper); color: var(--ink);
+    font: 18px/1.5 Georgia, "Times New Roman", serif;
+  }
+  main { max-width: 34rem; padding: 2rem; }
+  h1 { font-size: 3rem; margin: 0 0 .5rem; letter-spacing: -.02em; }
+  h1 span { color: var(--comb); }
+  p { margin: .25rem 0; }
+  code {
+    font-family: ui-monospace, monospace; font-size: .85em;
+    background: #f2e8d0; padding: .1em .4em; border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Hive<span>Mart</span></h1>
+  <p>Fictional storefront used to demo CloudBees Unify Release Orchestration.</p>
+  <p>Component: <code>hivemart-web</code> · Served by nginx.</p>
+  <p>Sibling components: <code>hivemart-api</code>, <code>hivemart-worker</code>.</p>
+</main>
+</body>
+</html>
